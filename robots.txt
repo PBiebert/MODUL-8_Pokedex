@@ -1,0 +1,4 @@
+# Suchmaschinen aussperren, Impressum kann nicht gefunden werden.
+
+User-agent: *
+Disallow: /impressum.html

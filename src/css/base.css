@@ -1,0 +1,44 @@
+/* Fonts einbinden */
+@font-face {
+  font-family: "Oswald";
+  src: url(../fonts/Oswald/Oswald-VariableFont_wght.ttf) format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+:root {
+  /* Farbe */
+  --color-bg-main: rgba(10, 25, 41, 1);
+  --color-bg-header-footer: rgba(15, 41, 66, 1);
+
+  --color-fonts: rgb(190, 190, 190, 1);
+
+  /* Schriftarten */
+  --font-general: "Oswald";
+}
+
+/* Grundeinstellungen für alle Elemente */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* outline: 1px solid red; Dev */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Text-Grundlagen */
+body {
+  font-size: 16px; /* nur für Programierung, Später löschen  */
+  font-family: var(--font-general), sans-serif, monospace; /* Standartschriftart*/
+}
+
+/* Contentbegrenzung */
+.container {
+  max-width: 1400px;
+  width: 100%;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
