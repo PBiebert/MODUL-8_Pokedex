@@ -1,0 +1,142 @@
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.logo {
+  fill: none;
+  stroke: var(--color-fonts);
+  height: 48px;
+  width: 48px;
+  stroke-width: 2px;
+}
+
+.search-button {
+  background-color: transparent;
+  border: none;
+}
+
+.search-icon {
+  height: 24px;
+  width: 24px;
+  fill: var(--color-fonts);
+}
+
+.card-body {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  margin: 25px 25px 0 0;
+  padding: 10px;
+  height: 200px;
+  width: 400px;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 125ms ease-in-out;
+}
+
+.card-body:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  filter: brightness(1.1);
+}
+
+.background-img {
+  position: absolute;
+  right: -100px;
+  bottom: -105px;
+  rotate: 33deg;
+}
+
+.poke-background {
+  fill: none;
+  stroke: var(--color-fonts);
+  height: 400px;
+  width: 400px;
+  stroke-width: 2px;
+  filter: opacity(0.3);
+}
+
+.data-container {
+  height: 100%;
+  width: 60%;
+}
+
+.poke-img {
+  height: 100%;
+  width: 40%;
+}
+
+.normal {
+  background: var(--normal);
+}
+
+.fire {
+  background: var(--fire);
+}
+
+.water {
+  background: var(--water);
+}
+
+.electric {
+  background: var(--electric);
+}
+
+.grass {
+  background: var(--grass);
+}
+
+.ice {
+  background: var(--ice);
+}
+
+.fighting {
+  background: var(--fighting);
+}
+
+.poison {
+  background: var(--poison);
+}
+
+.ground {
+  background: var(--ground);
+}
+
+.flying {
+  background: var(--flying);
+}
+
+.psychic {
+  background: var(--psychic);
+}
+
+.bug {
+  background: var(--bug);
+}
+
+.rock {
+  background: var(--rock);
+}
+
+.ghost {
+  background: var(--ghost);
+}
+
+.dragon {
+  background: var(--dragon);
+}
+
+.dark {
+  background: var(--dark);
+}
+
+.steel {
+  background: var(--steel);
+}
+
+.fairy {
+  background: var(--fairy);
+}
