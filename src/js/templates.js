@@ -2,7 +2,7 @@
 
 function templatePokemonCard(i) {
   return /*html*/ `
-    <div class="card-body ${currentStack[i].typs[0].type.name}" id="${currentStack[i].id}">
+    <div class="card-body ${currentStack[i].typs[0].type.name}" id="${currentStack[i].id}" onclick=openDialog(id)>
         <div class="background-img">
             <svg class="poke-background" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M3 12a9 9 0 1 0 18 0 9 9 0 1 0 -18 0"></path>

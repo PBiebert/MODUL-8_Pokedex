@@ -168,3 +168,7 @@
 .fairy {
   background: var(--fairy);
 }
+
+.dialog-nav-activ {
+  background-color: rgb(201, 201, 201);
+}

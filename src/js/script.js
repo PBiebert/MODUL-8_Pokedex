@@ -7,6 +7,7 @@ async function init() {
   await loadPokemonList(counter, offset);
   renderPokemonCard();
   console.log(currentStack);
+  openDialog(1);
 }
 
 async function loadPokemonList(counter, offset) {
@@ -73,4 +74,9 @@ async function loadMore() {
 
   await loadPokemonList(counter, offset);
   renderPokemonCard();
+}
+
+function openDialog(id) {
+  const dialog = document.querySelector("dialog");
+  dialog.showModal();
 }

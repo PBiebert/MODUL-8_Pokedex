@@ -50,8 +50,102 @@
       <div class="button-container container">
         <button id="load-more" type="button" onclick="loadMore()">load more</button>
       </div>
-    </main>
 
-    <footer></footer>
+      <dialog>
+        <div class="dialog-body grass">
+          <div class="dialog-img">
+            <div class="name-area">
+              <h2>Glumande</h2>
+              <h2>#1</h2>
+            </div>
+            <div class="picture-class-area">
+              <div class="elements">
+                <div class="element grass">Grass</div>
+              </div>
+              <img class="poke-img" src="src/img/3.svg" alt="" />
+            </div>
+            <svg class="poke-background dialog-poke-background" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M3 12a9 9 0 1 0 18 0 9 9 0 1 0 -18 0"></path>
+              <path d="M9 12a3 3 0 1 0 6 0 3 3 0 1 0 -6 0"></path>
+              <path d="M3 12h6"></path>
+              <path d="M15 12h6"></path>
+            </svg>
+          </div>
+          <div class="dialog-content-container">
+            <nav class="dialog-nav">
+              <ul>
+                <li class="dialog-nav-activ">About</li>
+                <li>Base Stats</li>
+                <li class="">Evolution</li>
+              </ul>
+            </nav>
+            <div class="dialog-content">
+              <table class="about d-none">
+                <tr>
+                  <th>Species:</th>
+                  <td>ABCD</td>
+                </tr>
+                <tr>
+                  <th>Height:</th>
+                  <td>170cm</td>
+                </tr>
+                <tr>
+                  <th>Weight:</th>
+                  <td>90.5kg</td>
+                </tr>
+                <tr>
+                  <th>Abilities:</th>
+                  <td>dies und das</td>
+                </tr>
+              </table>
+
+              <div class="base-stats">
+                <table>
+                  <tr>
+                    <th class="stats-name">Hp:</th>
+                    <td class="stats-value">45</td>
+                    <td class="stats-progress"><progress value="45" max="100"></progress></td>
+                  </tr>
+                  <tr>
+                    <th class="stats-name">Attack:</th>
+                    <td class="stats-value">50</td>
+                    <td class="stats-progress"><progress value="50" max="100"></progress></td>
+                  </tr>
+
+                  <tr>
+                    <th class="stats-name">Defense:</th>
+                    <td class="stats-value">60</td>
+                    <td class="stats-progress"><progress value="60" max="100"></progress></td>
+                  </tr>
+                  <tr>
+                    <th class="stats-name">Sp. Atk:</th>
+                    <td class="stats-value">65</td>
+                    <td class="stats-progress"><progress value="60" max="100"></progress></td>
+                  </tr>
+
+                  <tr>
+                    <th class="stats-name">Sp. Def:</th>
+                    <td class="stats-value">45</td>
+                    <td class="stats-progress"><progress value="45" max="100"></progress></td>
+                  </tr>
+
+                  <tr>
+                    <th class="stats-name">Speed:</th>
+                    <td class="stats-value">45</td>
+                    <td class="stats-progress"><progress value="45" max="100"></progress></td>
+                  </tr>
+
+                  <tr>
+                    <th class="stats-name">Total:</th>
+                    <td class="stats-value">317</td>
+                    <td class="stats-progress"><progress value="317" max="600"></progress></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </dialog>
+    </main>
   </body>
 </html>
