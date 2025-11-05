@@ -26,3 +26,67 @@ function templateElement(element) {
     <div class="element ${element.toLowerCase()}">${element} </div>
     `;
 }
+
+function templateDialog(stackId) {
+  return `
+        <div class="dialog-body" onclick="event.stopPropagation()">
+          <div class="dialog-img">
+            <div class="name-area">
+              <h2>${currentStack[stackId].name}</h2>
+              <h2># ${currentStack[stackId].id}</h2>
+            </div>
+            <div class="picture-class-area">
+              <div class="elements" id=dialog-element-container>
+
+              </div>
+              <img class="poke-img" src="${currentStack[stackId].img}" alt="Bild von ${currentStack[stackId].name}" />
+            </div>
+            <svg class="poke-background dialog-poke-background" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M3 12a9 9 0 1 0 18 0 9 9 0 1 0 -18 0"></path>
+              <path d="M9 12a3 3 0 1 0 6 0 3 3 0 1 0 -6 0"></path>
+              <path d="M3 12h6"></path>
+              <path d="M15 12h6"></path>
+            </svg>
+          </div>
+          <div class="dialog-content-container">
+            <nav class="dialog-nav ">
+              <ul>
+                <li>About</li>
+                <li class="dialog-nav-activ">Base Stats</li>
+                <li>Evolution</li>
+              </ul>
+            </nav>
+            <div class="dialog-content">
+              <table class="about d-none">
+                <tr>
+                  <th>Height:</th>
+                  <td>${currentStack[stackId].height}</td>
+                </tr>
+                <tr>
+                  <th>Weight:</th>
+                  <td>${currentStack[stackId].weight}</td>
+                </tr>
+                <tr>
+                  <th>Abilities:</th>
+                  <td id="abilities">dies und das</td>
+                </tr>
+              </table>
+
+              <div class="base-stats">
+                <table>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>`;
+}
+
+function templateDialogStats(statsArray) {
+  return `
+    <tr>
+      <th class="stats-name">${statsArray.stat.name}</th>
+      <td class="stats-value">${statsArray.base_stat}</td>
+      <td class="stats-progress"><progress value="${statsArray.base_stat}" max="100"></progress></td>
+     </tr>
+`;
+}
