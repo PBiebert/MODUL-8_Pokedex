@@ -31,9 +31,13 @@ function templateDialog(stackId) {
   return `
         <div class="dialog-body" onclick="event.stopPropagation()">
           <div class="dialog-img">
-            <div class="name-area">
-              <h2>${currentStack[stackId].name}</h2>
+            <div class="dialog-headline">
+              <div class="name-area">
               <h2># ${currentStack[stackId].id}</h2>
+                <h2>${currentStack[stackId].name}</h2>
+              </div>
+
+              <button class="close-dialog" onclick="closeDialog()">X</button>
             </div>
             <div class="picture-class-area">
               <div class="elements" id=dialog-element-container>
@@ -49,15 +53,14 @@ function templateDialog(stackId) {
             </svg>
           </div>
           <div class="dialog-content-container">
-            <nav class="dialog-nav ">
+            <nav class="dialog-nav">
               <ul>
-                <li>About</li>
-                <li class="dialog-nav-activ">Base Stats</li>
-                <li>Evolution</li>
+                <li id="about" class="dialog-nav-activ" onclick="openDialogNavElement(id)" tabindex="0" autofocus>About</li>
+                <li id="base-stats"  onclick="openDialogNavElement(id)" tabindex="0">Base Stats</li>
               </ul>
             </nav>
             <div class="dialog-content">
-              <table class="about d-none">
+              <table class="about ">
                 <tr>
                   <th>Height:</th>
                   <td>${currentStack[stackId].height}</td>
@@ -72,10 +75,16 @@ function templateDialog(stackId) {
                 </tr>
               </table>
 
-              <div class="base-stats">
+              <div class="base-stats d-none">
                 <table>
                 </table>
               </div>
+
+            </div>
+
+            <div class="change-container">
+              <button class="dialog-button" id="back" onclick="changePokemon(id)">back</button>
+              <button class="dialog-button" id="next" onclick="changePokemon(id)">next</button>
             </div>
           </div>
         </div>`;
@@ -86,7 +95,7 @@ function templateDialogStats(statsArray) {
     <tr>
       <th class="stats-name">${statsArray.stat.name}</th>
       <td class="stats-value">${statsArray.base_stat}</td>
-      <td class="stats-progress"><progress value="${statsArray.base_stat}" max="100"></progress></td>
+      <td class="stats-progress"><progress value="${statsArray.base_stat}" max="255"></progress></td>
      </tr>
 `;
 }

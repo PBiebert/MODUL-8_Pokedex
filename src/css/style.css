@@ -39,10 +39,36 @@
   z-index: 1;
 }
 
+.dialog-headline {
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .name-area {
   display: flex;
-  z-index: 2;
-  justify-content: space-between;
+}
+
+.name-area h2 {
+  display: flex;
+  margin-right: 1rem;
+}
+
+.close-dialog {
+  background-color: transparent;
+  margin: 0.5rem;
+  width: auto;
+  height: auto;
+}
+
+.close-dialog:hover {
+  scale: 1.2;
+}
+
+.close-dialog:focus {
+  scale: 1.2;
+  outline: none;
 }
 
 .picture-class-area {
@@ -73,7 +99,7 @@
 }
 
 .dialog-content {
-  height: calc(100% - 50px);
+  height: calc(100% - 50px - 48px);
   width: 100%;
   padding: 2rem;
 }
@@ -88,4 +114,29 @@
 
 .stats-progress {
   width: 60%;
+}
+
+.change-container {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid black;
+  height: 3rem;
+}
+
+.dialog-button {
+  width: 100%;
+  border-radius: 0;
+}
+
+.dialog-button:hover {
+  scale: none;
+  background-color: rgb(201, 201, 201);
+}
+
+.dialog-button:focus {
+  background-color: rgb(201, 201, 201);
+}
+
+#back {
+  border-right: 1px solid black;
 }

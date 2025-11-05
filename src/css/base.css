@@ -163,6 +163,11 @@ li:hover {
   background-color: rgb(201, 201, 201);
 }
 
+li:focus {
+  outline: none;
+  background-color: rgb(201, 201, 201);
+}
+
 table {
   width: 100%;
 }
@@ -183,8 +188,25 @@ td {
 
 progress {
   width: 100%;
+  height: 1rem;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+progress::-webkit-progress-bar {
+  border-radius: 5px;
+  background-color: rgb(201, 201, 201);
+}
+
+progress::-webkit-progress-value {
+  border-radius: 5px;
+  background-color: #0300cf;
 }
 
 .d-none {
   display: none;
+}
+
+.overflowHidden {
+  overflow: hidden;
 }
