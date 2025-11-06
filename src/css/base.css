@@ -208,10 +208,10 @@ progress::-webkit-progress-value {
   background-color: #0300cf;
 }
 
-.d-none {
-  display: none;
-}
-
 .overflowHidden {
   overflow: hidden;
+}
+
+.d-none {
+  display: none !important;
 }

@@ -107,7 +107,7 @@ function templateLoadMoreButton() {
 
 function spinner() {
   return `
-      <div class="overlay">
+
         <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 910.13 908.95">
           <path
             class="cls-1"

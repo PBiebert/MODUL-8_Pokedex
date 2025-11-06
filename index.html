@@ -13,10 +13,6 @@
     <link rel="stylesheet" href="src/css/base.css" />
     <link rel="stylesheet" href="src/css/components.css" />
     <link rel="stylesheet" href="src/css/style.css" />
-
-    <!-- Embedding JavaScript -->
-    <script src="src/js/templates.js" defer></script>
-    <script src="src/js/script.js" defer></script>
   </head>
   <body onload="init()">
     <header>
@@ -54,8 +50,12 @@
     <main>
       <div class="card-container container"></div>
       <div class="button-container container"></div>
-
       <dialog onclick="closeDialog()"></dialog>
+      <div class="overlay d-none"></div>
     </main>
+
+    <!-- Embedding JavaScript -->
+    <script src="src/js/templates.js"></script>
+    <script src="src/js/script.js"></script>
   </body>
 </html>

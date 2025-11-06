@@ -116,7 +116,7 @@ async function loadMore() {
 function openDialog(id) {
   const stackId = Number(id - 1);
   currentDialog = stackId;
-  renderDialog(stackId);
+  setDialogHtml(stackId);
   setDialogBackgroundColor(stackId);
   setDialogElements(stackId);
   setDialogAbilities(stackId);
@@ -131,7 +131,7 @@ function closeDialog() {
   dialog.innerHTML = "";
 }
 
-function renderDialog(stackId) {
+function setDialogHtml(stackId) {
   dialog.innerHTML += templateDialog(stackId);
 }
 
@@ -262,11 +262,15 @@ function ButtonDisableToggle(value) {
 }
 
 function loadSpinner(value) {
+  const overlay = document.querySelector(".overlay");
+
   if (value == true) {
-    main.innerHTML += spinner();
+    overlay.classList.remove("d-none");
+    overlay.innerHTML += spinner();
   } else if (value == false) {
-    const overlay = document.querySelector(".overlay");
-    overlay.remove();
+    const svg = overlay.querySelector(`svg`);
+    overlay.removeChild(svg);
+    overlay.classList.add("d-none");
   }
 }
 
