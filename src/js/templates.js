@@ -1,8 +1,8 @@
 "use strict";
 
-function templatePokemonCard(i) {
+function templatePokemonCard(i, saveStag) {
   return /*html*/ `
-    <div class="card-body ${currentStack[i].typs[0].type.name}" id="${currentStack[i].id}" onclick=openDialog(id)>
+    <div class="card-body ${saveStag[i].typs[0].type.name}" id="${saveStag[i].id}" onclick=openDialog(id)>
         <div class="background-img">
             <svg class="poke-background" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M3 12a9 9 0 1 0 18 0 9 9 0 1 0 -18 0"></path>
@@ -12,11 +12,11 @@ function templatePokemonCard(i) {
             </svg>
         </div>
         <div class="data-container">
-            <h2 class="name">#${currentStack[i].id} ${currentStack[i].name}</h2>
-            <div class="elements" id="elemente_${currentStack[i].name}"></div>
+            <h2 class="name">#${saveStag[i].id} ${saveStag[i].name}</h2>
+            <div class="elements" id="elemente_${saveStag[i].name}"></div>
         </div>
         <div class="poke-img">
-            <img src="${currentStack[i].img}" alt="Picture from ${currentStack[i].name}">
+            <img src="${saveStag[i].img}" alt="Picture from ${saveStag[i].name}">
         </div>
     </div>`;
 }

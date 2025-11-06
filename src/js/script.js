@@ -2,6 +2,7 @@
 const main = document.querySelector("main");
 const dialog = document.querySelector("dialog");
 let currentStack = [];
+let filterStack = [];
 let allPokemonStack = [];
 let currentDialog;
 let counter = 3;
@@ -16,7 +17,7 @@ document.addEventListener("keyup", (event) => {
 async function init() {
   loadSpinner(true);
   await loadPokemonList(counter, offset);
-  renderPokemonCard();
+  renderPokemonCard(currentStack);
   renderLoadMoreButton();
   loadSpinner(false);
   console.log(currentStack);
@@ -28,13 +29,13 @@ async function loadPokemonList(counter, offset) {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${counter}&offset=${offset}`);
     const responseToJson = await response.json();
     let fetchStack = responseToJson.results;
-    await loadPokemonDetails(fetchStack);
+    await loadPokemonDetails(fetchStack, currentStack);
   } catch (error) {
     errorMassage(error);
   }
 }
 
-async function loadPokemonDetails(fetchStack) {
+async function loadPokemonDetails(fetchStack, saveStack) {
   for (let i = 0; i < fetchStack.length; i++) {
     try {
       const response = await fetch(fetchStack[i].url);
@@ -42,7 +43,7 @@ async function loadPokemonDetails(fetchStack) {
 
       console.log(pokemonData);
 
-      createNewPokemon(pokemonData);
+      createNewPokemon(pokemonData, saveStack);
     } catch (error) {
       errorMassage(error);
     }
@@ -55,7 +56,7 @@ async function loadAllPokemonName() {
   allPokemonStack.push(...responseToJson.results);
 }
 
-function createNewPokemon(pokemonData) {
+function createNewPokemon(pokemonData, saveStack) {
   let pokemon = {};
 
   pokemon.id = pokemonData.id;
@@ -66,28 +67,28 @@ function createNewPokemon(pokemonData) {
   pokemon.weight = (pokemonData.weight * 0.1).toFixed(2) + " kg";
   pokemon.abilities = pokemonData.abilities;
   pokemon.stats = pokemonData.stats;
-  currentStack.push(pokemon);
+  saveStack.push(pokemon);
 }
 
-function renderPokemonCard() {
+function renderPokemonCard(saveStack) {
   const cartContainer = document.querySelector(".card-container");
 
   cartContainer.innerHTML = "";
 
-  for (let i = 0; i < currentStack.length; i++) {
-    cartContainer.innerHTML += templatePokemonCard(i);
-    renderPokemonClass(i);
+  for (let i = 0; i < saveStack.length; i++) {
+    cartContainer.innerHTML += templatePokemonCard(i, saveStack);
+    renderPokemonClass(saveStack, i);
   }
 }
 
-function renderPokemonClass(i) {
-  let currentPokemon = currentStack[i];
-  let currenElement = document.getElementById(`elemente_${currentStack[i].name}`);
+function renderPokemonClass(saveStack, i) {
+  let currentPokemon = saveStack[i];
+  let currenElement = document.getElementById(`elemente_${saveStack[i].name}`);
 
   for (let j = 0; j < currentPokemon.typs.length; j++) {
     let element = capitalizeFirstLetter(currentPokemon.typs[j].type.name);
 
-    currenElement.innerHTML += templateElement(element);
+    saveStack.innerHTML += templateElement(element, currenElement);
   }
 }
 
@@ -108,7 +109,7 @@ async function loadMore() {
   ButtonDisableToggle(true);
   loadSpinner(true);
   await loadPokemonList(counter, offset);
-  renderPokemonCard();
+  renderPokemonCard(currentStack);
   ButtonDisableToggle(false);
   loadSpinner(false);
 }
@@ -119,8 +120,8 @@ function openDialog(id) {
   rednerDialog(stackId);
 }
 
-function rednerDialog(id) {
-  setDialogHtml(id);
+function rednerDialog(id, saveStag) {
+  setDialogHtml(id, saveStag);
   setDialogBackgroundColor(id);
   setDialogElements(id);
   setDialogAbilities(id);
@@ -150,8 +151,8 @@ function closeDialog() {
   dialog.innerHTML = "";
 }
 
-function setDialogHtml(stackId) {
-  dialog.innerHTML += templateDialog(stackId);
+function setDialogHtml(stackId, saveStag) {
+  dialog.innerHTML += templateDialog(stackId, saveStag);
 }
 
 function setDialogBackgroundColor(stackId) {
@@ -229,8 +230,6 @@ function openDialogNavElement(navElement) {
   }
 }
 
-// -------------------------------
-
 function checkValidateCurrentIndex() {
   if (currentDialog == -1) {
     currentDialog = currentStack.length - 1;
@@ -239,17 +238,17 @@ function checkValidateCurrentIndex() {
   }
 }
 
-// function filterAllPokemon() {
-//   let inputField = document.getElementById("search");
-//   let inputMassage = inputField.value;
+async function filterAllPokemon() {
+  let inputField = document.getElementById("search");
+  let inputMassage = inputField.value.toLowerCase().trim();
 
-//   let filterResult = allPokemonStack.filter();
-//   console.log(filterResult);
-
-//   // if (inputMassage.length >= 3) {
-
-//   // }
-// }
+  if (inputMassage.length >= 3) {
+    let filterResult = allPokemonStack.filter((pokemon) => pokemon.name.startsWith(inputMassage));
+    await loadPokemonDetails(filterResult, filterStack);
+    console.log(filterStack);
+    renderPokemonCard(filterStack);
+  }
+}
 
 function setOverflowHiddn(element) {
   let setElement = document.querySelector(element);
