@@ -116,13 +116,32 @@ async function loadMore() {
 function openDialog(id) {
   const stackId = Number(id - 1);
   currentDialog = stackId;
-  setDialogHtml(stackId);
-  setDialogBackgroundColor(stackId);
-  setDialogElements(stackId);
-  setDialogAbilities(stackId);
-  setDialogStats(stackId);
+  rednerDialog(stackId);
+}
+
+function rednerDialog(id) {
+  setDialogHtml(id);
+  setDialogBackgroundColor(id);
+  setDialogElements(id);
+  setDialogAbilities(id);
+  setDialogStats(id);
   setOverflowHiddn("body");
   dialog.showModal();
+}
+
+function changePokemon(value) {
+  switch (value) {
+    case "back":
+      currentDialog--;
+      break;
+    case "next":
+      currentDialog++;
+      break;
+  }
+  closeDialog();
+
+  checkValidateCurrentIndex();
+  rednerDialog(currentDialog);
 }
 
 function closeDialog() {
@@ -210,21 +229,7 @@ function openDialogNavElement(navElement) {
   }
 }
 
-function changePokemon(value) {
-  switch (value) {
-    case "back":
-      currentDialog--;
-      break;
-    case "next":
-      currentDialog++;
-      break;
-  }
-  closeDialog();
-  checkValidateCurrentIndex();
-  renderDialog(currentDialog);
-  setDialogElements(currentDialog);
-  dialog.showModal();
-}
+// -------------------------------
 
 function checkValidateCurrentIndex() {
   if (currentDialog == -1) {
