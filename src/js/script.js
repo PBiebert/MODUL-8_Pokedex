@@ -255,20 +255,29 @@ function checkValidateCurrentIndex() {
 
 async function filterAllPokemon() {
   let inputField = document.getElementById("search");
+  const cartContainer = document.querySelector(".card-container");
   let inputMassage = inputField.value.toLowerCase().trim();
 
   if (inputMassage.length >= 3) {
-    filterStack = [];
-    let filterResult = allPokemonStack.filter((pokemon) => pokemon.name.toLowerCase().startsWith(inputMassage));
-    await loadPokemonDetails(filterResult, filterStack);
-    activeStack = filterStack;
-    renderPokemonCard(filterStack);
-    ButtonDisableToggle(true);
+    await setFilter(inputMassage);
+
+    if (filterStack.length == 0) {
+      cartContainer.innerHTML = templatePokemonNotFound();
+      toggleDnone(document.getElementById("load-more"));
+    }
   } else if (inputMassage.length === 0) {
     activeStack = currentStack;
     renderPokemonCard(currentStack);
-    ButtonDisableToggle(false);
+    toggleDnone(document.getElementById("load-more"));
   }
+}
+
+async function setFilter(inputMassage) {
+  filterStack = [];
+  let filterResult = allPokemonStack.filter((pokemon) => pokemon.name.toLowerCase().startsWith(inputMassage));
+  await loadPokemonDetails(filterResult, filterStack);
+  activeStack = filterStack;
+  renderPokemonCard(filterStack);
 }
 
 function setOverflowHiddn(element) {
@@ -303,4 +312,8 @@ function errorMassage(error) {
   main.innerHTML = "";
   main.innerHTML += templateErrorMassage(error);
   console.log(error);
+}
+
+function toggleDnone(element) {
+  element.classList.toggle("d-none");
 }

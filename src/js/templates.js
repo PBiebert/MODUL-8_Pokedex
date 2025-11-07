@@ -146,3 +146,7 @@ function templateErrorMassage(error) {
     <p>Fehler: ${error}</p>
   </div>`;
 }
+
+function templatePokemonNotFound() {
+  return `<h2 id="not-found">Pokémon not found!</h2>`;
+}
