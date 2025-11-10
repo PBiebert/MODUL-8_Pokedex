@@ -1,6 +1,8 @@
 "use strict";
 const main = document.querySelector("main");
 const dialog = document.querySelector("dialog");
+const cartContainer = document.querySelector(".card-container");
+const language = "en";
 let currentStack = [];
 let filterStack = [];
 let allPokemonStack = [];
@@ -47,9 +49,15 @@ async function loadPokemonDetails(fetchStack, saveStack) {
     const allPokemonData = await Promise.all(promises);
 
     for (let i = 0; i < allPokemonData.length; i++) {
-      const pokemonData = allPokemonData[i].pokemonData;
-      const pokemonSpecies = allPokemonData[i].pokemonSpecies;
-      createNewPokemon(pokemonData, pokemonSpecies, saveStack);
+      if (allPokemonData[i] !== null && allPokemonData[i] !== undefined) {
+        try {
+          const pokemonData = allPokemonData[i].pokemonData;
+          const pokemonSpecies = allPokemonData[i].pokemonSpecies;
+          createNewPokemon(pokemonData, pokemonSpecies, saveStack);
+        } catch (error) {
+          console.error(`Fehler beim Erstellen von Pokémon:`, error);
+        }
+      }
     }
   } catch (error) {
     errorMassage(error);
@@ -77,23 +85,32 @@ async function loadAllPokemonName() {
   allPokemonStack.push(...responseToJson.results);
 }
 
-function createNewPokemon(pokemonData, pokemonSpecies, saveStack) {
+function createNewPokemon(pokemonData, pokemonSpecies, saveStack, language) {
   let pokemon = {};
 
   pokemon.id = pokemonData.id;
   pokemon.name = capitalizeFirstLetter(pokemonData.name);
   pokemon.typs = pokemonData.types;
-  // pokemon.img = pokemonData.sprites.other.dream_world.front_default;
   pokemon.img = alternativePokémonImage(pokemonData);
   pokemon.height = (pokemonData.height * 0.1).toFixed(2) + " m";
   pokemon.weight = (pokemonData.weight * 0.1).toFixed(2) + " kg";
   pokemon.abilities = pokemonData.abilities;
   pokemon.stats = pokemonData.stats;
-  pokemon.genera = pokemonSpecies.genera[7].genus;
+  pokemon.genera = getGeneraByLanguage(pokemonSpecies, language);
   pokemon.baseColor = capitalizeFirstLetter(pokemonSpecies.color.name);
   pokemon.baseHappyness = pokemonSpecies.base_happiness;
   pokemon.shape = pokemonSpecies.shape.name;
   saveStack.push(pokemon);
+}
+
+function getGeneraByLanguage(pokemonSpecies, language) {
+  const index = pokemonSpecies.genera.findIndex((entry) => entry.language.name === language);
+
+  if (index !== -1) {
+    return pokemonSpecies.genera[index].genus;
+  } else {
+    return "Unknown";
+  }
 }
 
 function alternativePokémonImage(pokemonData) {
@@ -103,16 +120,21 @@ function alternativePokémonImage(pokemonData) {
     return pokemonData.sprites.other["official-artwork"].front_default;
   } else if (pokemonData.sprites.other.home.front_default != null) {
     return pokemonData.sprites.other.home.front_default;
+  } else {
+    return "";
   }
 }
 
 function renderPokemonCard(saveStack) {
-  const cartContainer = document.querySelector(".card-container");
-
-  cartContainer.innerHTML = "";
+  let htmlContent = "";
 
   for (let i = 0; i < saveStack.length; i++) {
-    cartContainer.innerHTML += templatePokemonCard(i, saveStack);
+    htmlContent += templatePokemonCard(i, saveStack);
+  }
+
+  cartContainer.innerHTML = htmlContent;
+
+  for (let i = 0; i < saveStack.length; i++) {
     renderPokemonClass(saveStack, i);
   }
 }
@@ -278,7 +300,7 @@ function checkValidateCurrentIndex() {
 
 async function filterAllPokemon() {
   let inputField = document.getElementById("search");
-  const cartContainer = document.querySelector(".card-container");
+
   const loadMoreButton = document.getElementById("load-more");
   let inputMassage = inputField.value.toLowerCase().trim();
 
@@ -288,13 +310,12 @@ async function filterAllPokemon() {
     if (filterStack.length == 0) {
       cartContainer.innerHTML = templatePokemonNotFound();
     }
-    // Button immer verstecken beim Filtern
+
     setDnone(loadMoreButton);
   } else if (inputMassage.length === 0) {
-    // Zurück zur normalen Ansicht
     activeStack = currentStack;
     renderPokemonCard(currentStack);
-    // Button wieder einblenden
+
     removeDnone(loadMoreButton);
   }
 }
@@ -339,8 +360,8 @@ function loadSpinner(value) {
 }
 
 function errorMassage(error) {
-  main.innerHTML = "";
-  main.innerHTML += templateErrorMassage(error);
+  cartContainer.innerHTML = "";
+  cartContainer.innerHTML += templateErrorMassage();
   console.log(error);
 }
 

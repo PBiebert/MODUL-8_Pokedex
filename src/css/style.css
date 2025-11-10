@@ -19,6 +19,7 @@
   flex-direction: column;
   width: 500px;
   height: 95vh;
+  max-height: 700px;
   overflow: hidden;
 }
 
@@ -143,11 +144,11 @@
 
 .dialog-button:hover {
   scale: none;
-  background-color: rgb(201, 201, 201);
+  background-color: var(--color-fonts);
 }
 
 .dialog-button:focus {
-  background-color: rgb(201, 201, 201);
+  background-color: var(--color-fonts);
 }
 
 #back {

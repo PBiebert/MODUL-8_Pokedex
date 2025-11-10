@@ -159,12 +159,11 @@ function spinner() {
       </div>`;
 }
 
-function templateErrorMassage(error) {
+function templateErrorMassage() {
   return `
   <div class="error-massage">
     <p>Es ist ein Fehler aufgetreten</p>
     <p>Bitte versuchen Sie es später erneut</p>
-    <p>Fehler: ${error}</p>
   </div>`;
 }
 
